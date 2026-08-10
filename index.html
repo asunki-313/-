@@ -129,4 +129,76 @@ function openShop(){
 
 sync();
 </script><script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{});}</script>
+
+<style>
+#v12Hub{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;direction:rtl;max-width:720px;margin:18px auto;padding:14px}
+.v12c{background:#171d43;color:#fff;border-radius:18px;padding:16px;margin:10px 0}
+.v12b{border:0;border-radius:12px;padding:11px 15px;font-weight:800;margin:4px;cursor:pointer}
+.v12i{width:100%;box-sizing:border-box;padding:12px;border:0;border-radius:12px;margin:6px 0;font-size:16px}
+.v12muted{opacity:.7;font-size:13px}
+</style>
+<section id="v12Hub" dir="rtl">
+<div class="v12c">
+<h2>👤 حساب اللاعب</h2>
+<div class="v12muted">تسجيل الدخول اختياري. الربط النهائي مع Firebase Phone OTP يتم بعد إنشاء مشروع Firebase.</div>
+<button class="v12b" id="v12OpenAuth">📱 تسجيل برقم الجوال</button>
+<div id="v12Auth" style="display:none;margin-top:10px">
+<input id="v12Phone" class="v12i" inputmode="tel" placeholder="+966 5XXXXXXXX">
+<button class="v12b" id="v12Send">إرسال OTP</button>
+<div id="v12OtpBox" style="display:none">
+<input id="v12Otp" class="v12i" inputmode="numeric" maxlength="6" placeholder="رمز التحقق">
+<button class="v12b" id="v12Verify">تحقق</button>
+</div>
+<div id="v12Msg" class="v12muted"></div>
+</div>
+</div>
+<div class="v12c">
+<h2>🎁 الصندوق اليومي</h2>
+<p>المكافأة المعتادة <b>100 Coins</b>، مع فرصة محدودة للحصول على <b>200 Coins</b>.</p>
+<button class="v12b" id="v12Chest">فتح الصندوق</button>
+<div id="v12ChestMsg">🎁 الصندوق جاهز</div>
+<div id="v12Streak" class="v12muted"></div>
+</div>
+<div class="v12c">
+<h2>🏆 Leaderboard</h2>
+<p class="v12muted">الحسابات والترتيب سيتم ربطها بالسيرفر في المرحلة التالية. لا نعتمد على localStorage كرصيد حقيقي.</p>
+<span>🌎 عالمي</span> &nbsp; <span>🇸🇦 السعودية</span> &nbsp; <span>👥 الأصدقاء</span>
+</div>
+</section>
+<script>
+window.V12_CONFIG={
+ version:"12.0",
+ auth:"phone-otp",
+ dailyChest:{normal:100,lucky:200,luckyChance:.12,streak7Bonus:300},
+ economy:{heart:100,doubleXP:250,fiftyFifty:75,extraTime:100},
+ security:{coinsServerAuthoritative:true,xpServerAuthoritative:true}
+};
+(function(){
+ const key="v12_daily";
+ const today=()=>new Date().toISOString().slice(0,10);
+ const load=()=>{try{return JSON.parse(localStorage.getItem(key)||"{}")}catch(e){return {}}};
+ const save=x=>localStorage.setItem(key,JSON.stringify(x));
+ const render=()=>{let x=load();document.getElementById("v12Streak").textContent="🔥 Streak: "+(x.streak||0)+" أيام";};
+ render();
+ document.getElementById("v12Chest").onclick=()=>{
+   let x=load(),d=today();
+   if(x.last===d){document.getElementById("v12ChestMsg").textContent="⏳ فتحت صندوق اليوم بالفعل";return}
+   let lucky=Math.random()<.12, coins=lucky?200:100;
+   let streak=x.streak||0;
+   if(x.last){let p=new Date(x.last+"T00:00:00");p.setDate(p.getDate()+1);streak=(p.toISOString().slice(0,10)===d)?streak+1:1}else streak=1;
+   let bonus=(streak%7===0)?300:0;
+   x.last=d;x.streak=streak;x.lastReward=coins+bonus;save(x);
+   document.getElementById("v12ChestMsg").textContent="🎉 حصلت على "+(coins+bonus)+" Coins"+(bonus?" — مكافأة 7 أيام!":"");
+   render();
+ };
+ document.getElementById("v12OpenAuth").onclick=()=>document.getElementById("v12Auth").style.display="block";
+ document.getElementById("v12Send").onclick=()=>{
+   let p=document.getElementById("v12Phone").value.trim(),m=document.getElementById("v12Msg");
+   if(!/^\+?\d[\d\s-]{7,}$/.test(p)){m.textContent="أدخل رقم جوال صحيح.";return}
+   m.textContent="واجهة OTP جاهزة. لن يتم قبول رمز وهمي؛ التحقق الحقيقي سيكون عبر Firebase.";
+   document.getElementById("v12OtpBox").style.display="block";
+ };
+ document.getElementById("v12Verify").onclick=()=>document.getElementById("v12Msg").textContent="Firebase غير مربوط بعد — لم يتم تسجيل الدخول.";
+})();
+</script>
 </body></html>
