@@ -1,1 +1,0 @@
-V11: 1000 questions, 15 categories, 10s timer, XP/Coins rules, PWA cache v11.
