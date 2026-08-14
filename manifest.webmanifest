@@ -1,27 +1,12 @@
 {
-  "name": "اختبر ذكاءك",
-  "short_name": "اختبر ذكاءك",
-  "description": "لعبة أسئلة وذكاء يومية",
-  "lang": "ar",
-  "dir": "rtl",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#0d1230",
-  "theme_color": "#10152f",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "name":"اختبر ذكاءك V.15",
+  "short_name":"اختبر ذكاءك",
+  "start_url":"./",
+  "display":"standalone",
+  "orientation":"landscape",
+  "background_color":"#020b1d",
+  "theme_color":"#07122a",
+  "lang":"ar",
+  "dir":"rtl",
+  "icons":[]
 }
