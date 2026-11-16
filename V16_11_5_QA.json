@@ -1,0 +1,8 @@
+{
+  "version": "V.16.11.5 PWA",
+  "base": "V.16.11.4 PWA",
+  "battleImageMethod": "embedded data URI in index.html",
+  "serviceWorkerCache": "ikhtabr-v16-11-5-pwa",
+  "staleBattleReferenceRemoved": true,
+  "javascriptSyntax": "PASS"
+}

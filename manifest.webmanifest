@@ -1,12 +1,21 @@
 {
-  "name":"اختبر ذكاءك V.15",
-  "short_name":"اختبر ذكاءك",
-  "start_url":"./",
-  "display":"standalone",
-  "orientation":"landscape",
-  "background_color":"#020b1d",
-  "theme_color":"#07122a",
-  "lang":"ar",
-  "dir":"rtl",
-  "icons":[]
+  "name": "اختبر ذكاءك V.16.12.14",
+  "short_name": "اختبر ذكاءك V16.12.13",
+  "lang": "ar-SA",
+  "dir": "rtl",
+  "start_url": "./?v=16.12.13",
+  "display": "standalone",
+  "background_color": "#07122a",
+  "theme_color": "#10152f",
+  "description": "اختبر ذكاءك V.16.12.14 PWA — 6000 Question Bank",
+  "icons": [
+    {
+      "src": "thinking_person.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "version": "16.12.13",
+  "id": "./?v=16.12.13"
 }
